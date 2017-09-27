@@ -199,9 +199,10 @@ public class Table
         out.println ("RA> " + name + ".select (" + keyVal + ")");
 
         List <Comparable []> rows = new ArrayList <> ();
-
+	
         //  T O   B E   I M P L E M E N T E D 
-
+		Comparable[] tableResult = index.get(keyVal);
+		rows.add(tableResult);
         return new Table (name + count++, attribute, domain, key, rows);
     } // select
 
