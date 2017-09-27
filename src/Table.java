@@ -163,7 +163,11 @@ public class Table
         List <Comparable []> rows = new ArrayList <> ();
 
         //  T O   B E   I M P L E M E N T E D 
-
+		for (int i = 0; i < tuples.size(); i++)
+		{
+			rows.add( getAttributes(tuples, attrs));
+		}
+		
         return new Table (name + count++, attrs, colDomain, newKey, rows);
     } // project
 
@@ -178,7 +182,6 @@ public class Table
     public Table select (Predicate <Comparable []> predicate)
     {
         out.println ("RA> " + name + ".select (" + predicate + ")");
-
         return new Table (name + count++, attribute, domain, key,
                    tuples.stream ().filter (t -> predicate.test (t))
                                    .collect (Collectors.toList ()));
