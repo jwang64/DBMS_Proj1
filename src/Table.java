@@ -179,6 +179,7 @@ public class Table
 		{
 			tuple[i] = tuples[columnPosition[i]];
 		}
+		return tuple;
 	}
 	
     /************************************************************************************
