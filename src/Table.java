@@ -232,9 +232,8 @@ public class Table
         List <Comparable []> rows = new ArrayList <> ();
 
         //KATHY KWON
-        KeyType kt;
         rows.addAll(tuples);
-        for (kt:table2.index.keySet()) {
+        for (KeyType kt:table2.index.keySet()) {
             if (kt!=null && !(index.containsKey(kt))) {
                 rows.add(table2.index.get(kt));
             }
