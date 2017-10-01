@@ -165,22 +165,12 @@ public class Table
         //  T O   B E   I M P L E M E N T E D 
 		for (int i = 0; i < tuples.size(); i++)
 		{
-		    rows.add( getAttributes(tuples.get(i), attrs));
+		    rows.add( extract(tuples.get(i), attrs));
 		}
 		
         return new Table (name + count++, attrs, colDomain, newKey, rows);
     } // project
 
-    private Comparable [] getAttributes(Comparable [] tuples, String [] columnNames)
-	{
-		int [] columnPosition = match(columnNames);
-		Comparable [] tuple = new Comparable[columnNames.length];
-		for(int i = 0; i < columnNames.length; i++)
-		{
-			tuple[i] = tuples[columnPosition[i]];
-		}
-		return tuple;
-	}
 	
     /************************************************************************************
      * Select the tuples satisfying the given predicate (Boolean function).
