@@ -162,10 +162,10 @@ public class Table
 
         List <Comparable []> rows = new ArrayList <> ();
 
-        //  T O   B E   I M P L E M E N T E D 
-		for (int i = 0; i < tuples.size(); i++)
+        //  James Wang
+		for (int i = 0; i < tuples.size(); i++) // goes through each tuple
 		{
-		    rows.add( extract(tuples.get(i), attrs));
+		    rows.add( extract(tuples.get(i), attrs)); // adds the name of the entity and its attribute
 		}
 		
         return new Table (name + count++, attrs, colDomain, newKey, rows);
@@ -201,9 +201,9 @@ public class Table
 
         List <Comparable []> rows = new ArrayList <> ();
 	
-        //  T O   B E   I M P L E M E N T E D 
-		Comparable[] tableResult = index.get(keyVal);
-		rows.add(tableResult);
+        //  James Wang 
+		Comparable[] tableResult = index.get(keyVal); // gets the key and sets it equal to tableResult
+		rows.add(tableResult); // the row adds the table result
         return new Table (name + count++, attribute, domain, key, rows);
     } // select
 
@@ -223,10 +223,10 @@ public class Table
         List <Comparable []> rows = new ArrayList <> ();
 
         //KATHY KWON
-        rows.addAll(tuples);
-        for (KeyType kt:table2.index.keySet()) {
-            if (kt!=null && !(index.containsKey(kt))) {
-                rows.add(table2.index.get(kt));
+        rows.addAll(tuples); // add the tuples 
+        for (KeyType kt:table2.index.keySet()) { // go through all of the keys in the second table
+            if (kt!=null && !(index.containsKey(kt))) { // check to see if there is a key and table 2 contains the key
+                rows.add(table2.index.get(kt)); // add the key to the row
             }
         }
 
