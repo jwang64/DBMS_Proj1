@@ -19,16 +19,18 @@ class testDB
 	Comparable [] book2 = { "Harry Potter", "J.K. Rowling"};
 	Comparable [] book3 = { "Hunger Games" , "Suzanne Collins"};
 	Comparable [] book4 = { "Maze Runner", "James Dashner"};
-
+	Comparable [] book5 = { "Dictionary" , "Merriam Webster"};
 	// insert books into tables
+	jamesBooks.insert(book1);
 	jamesBooks.insert(book2);
 	jamesBooks.insert(book3);
 	jamesBooks.insert(book4);
 	out.println();
 	jamesBooks.print();
 
-	peterBooks.insert(book1);
-	peterBooks.insert(book2);
+	peterBooks.insert(book3);
+	peterBooks.insert(book4);
+	peterBooks.insert(book5);
 	out.println();
 	peterBooks.print();
 
