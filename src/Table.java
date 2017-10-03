@@ -296,10 +296,46 @@ public class Table
 
         List <Comparable []> rows = new ArrayList <> ();
 
-        //  T O   B E   I M P L E M E N T E D 
+        //
+        //
+        // ===== IMPLEMENTED BY ANURAG BANERJEE =====
+        //
+        //
+        this.tuples.stream().forEach((t1_tuple) -> {
+            table2.tuples.stream().filter((t2_tuple) -> {
+                // remove tuples where primary key != foreign key
+                for(int i = 0; i < t_attrs.length; i++){
+                    Comparable foreign_key = t1_tuple[this.col(t_attrs[i])];
+                    Comparable primary_key = t2_tuple[table2.col(u_attrs[i])];
+                    if(!primary_key.equals(foreign_key)){
+                        return false;
+                    }
+                }
+                return true;
+            }).forEach((t2_tuple) -> {
+                rows.add(ArrayUtil.concat(t1_tuple, t2_tuple));
+            });
+        
+        });
 
-        return new Table (name + count++, ArrayUtil.concat (attribute, table2.attribute),
-                                          ArrayUtil.concat (domain, table2.domain), key, rows);
+        //appending 2 onto the duplicate attribute names
+        String[] newAttributes = table2.attribute;
+        for(int i = 0; i < this.attribute.length; i++){
+            for(int j = 0; j< table2.attribute.length; j++){
+                if(this.attribute[i].equals(table2.attribute[j])){
+                    newAttributes[j] = table2.attribute[j] + "2";
+                }
+            }
+        }
+
+        //
+        //
+        // ===== END IMPLEMENTED BY ANURAG BANERJEE =====
+        //
+        //
+
+
+        return new Table (name + count++, ArrayUtil.concat (attribute, newAttributes), ArrayUtil.concat (domain, table2.domain), key, rows);
     } // join
 
     /************************************************************************************
@@ -346,11 +382,48 @@ public class Table
 
         List <Comparable []> rows = new ArrayList <> ();
 
-        //  T O   B E   I M P L E M E N T E D 
 
-        // FIX - eliminate duplicate columns
-        return new Table (name + count++, ArrayUtil.concat (attribute, table2.attribute),
-                                          ArrayUtil.concat (domain, table2.domain), key, rows);
+        //
+        //
+        // ===== IMPLEMENTED BY ANURAG BANERJEE =====
+        //
+        //
+        String attributes = "";
+
+        // Loop over all the attributes and appending duplicates to attributes string
+        for (String t1_attribute : this.attribute) {
+            for (String t2_attribute : table2.attribute) {
+                if (t1_attribute.equals(t2_attribute)) {
+                    attributes += t1_attribute + " ";
+                }
+            }
+        }
+        
+        // Remove duplicate columns
+        
+        // Get duplicate attributes
+        List<String> dupList = Arrays.asList(attributes.split(" "));
+        
+        // Get all attributes
+        List<String> totalList = new ArrayList<String> ();
+        totalList.addAll(Arrays.asList(this.attribute));
+        totalList.addAll(Arrays.asList(table2.attribute));
+        
+        // Remove duplicates to be left with non duplicate attributes
+        totalList.removeAll(dupList);
+        
+        // Convert list to a string
+        String addString = totalList.toString();
+        addString = addString.substring(1, addString.length() - 1).replaceAll(",", " ");
+
+        return this.join(attributes, attributes, table2).project(attributes + addString);
+
+
+        //
+        //
+        // ===== END IMPLEMENTED BY ANURAG BANERJEE =====
+        //
+        //
     } // join
 
     /************************************************************************************
