@@ -249,25 +249,25 @@ public class Table
 
         List <Comparable []> rows = new ArrayList <> ();
 
-        //  T O   B E   I M P L E M E N T E D 
+        //  Peter Choi
         boolean peter=false;
         boolean kathy=false;
         boolean james=false;
         boolean aj=false;
-        for(Comparable[] tuple1 : tuples){
+        for(Comparable[] tuple1 : tuples){//iterates through all tuples
             peter=true;
-            for (Comparable[] tuple2 : table2.tuples){
-                kathy=true;
+            for (Comparable[] tuple2 : table2.tuples){//iterates through the second set of tuples
+                kathy=true;//set boolean to true because the second set of tuples exist
                 for(int i = 0; i < tuple1.length; i++){
-                    if(tuple1[i]==tuple2[i]){
+                    if(tuple1[i]==tuple2[i]){//if two items in the tuples are the same, set boolean to true
                         aj = true;
                     }//if
                     james = peter && kathy && aj;
                 }//for
-                if(james==true)
+                if(james==true)//if the tuples are the same, then go on to the next set of tuples
                     break;
             }//for
-            if(james==false)
+            if(james==false)//if the tuples aren't the same, add it to the table
                 rows.add(tuple1);
         }//for
         return new Table (name + count++, attribute, domain, key, rows);
@@ -556,9 +556,23 @@ public class Table
      */
     private boolean typeCheck (Comparable [] t)
     { 
-        //  T O   B E   I M P L E M E N T E D 
-
-        return true;
+        //Peter Choi
+         boolean isTrue = false;
+         if (domain.length == t.length){ //Checking for length compatability
+            for(int i = 0; i < domain.length; i++){
+                if(domain[i] == t[i].getClass())// Checking for type compatability
+                    isTrue = true;
+                else{
+                    System.out.println("TypeValue ERROR: Line:" + i);
+                    return false;
+                }
+            }
+            return true;
+         }
+        else{
+            System.out.println("TupleSize ERROR");
+            return false;
+        }
     } // typeCheck
 
     /************************************************************************************
